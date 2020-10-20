@@ -174,7 +174,7 @@ async function showFascia(){
         el.classList.add('collection-item')
         el.classList.add('fascia-item')
         el.append(hh)
-        if (typdef (pizzeOrdinate[i]) !== 'undefined')
+        if (typeof (pizzeOrdinate[i]) !== 'undefined')
             el.append(pizzeOrdinate[i])
             
         if (1){
