@@ -1,0 +1,56 @@
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.page {
+    margin-top: 60px;
+    height: 90%;
+}
+
+#pageOrdine {
+    position: absolute;
+    width: 100%;
+}
+
+
+.collection .collection-item {
+    padding: 5px 10px;
+}
+
+.collection.with-header .collection-item {
+    padding: 5px 10px;
+}
+
+.fascia-item {
+    text-align: center;
+    padding: 20px 5px;
+    font-size: 2em;
+}
+
+.giorno-item {
+    text-align: center;
+    padding: 25px 5px;
+    font-size: 2em;
+}
+
+.giornoNonValido {
+    color: red;
+}
+
+.giornoValido {
+    color: green;
+    font-weight: 700;
+}
+
+.fasciaNonValida {
+    background-color: red;
+    color: white;
+}
+
+.fasciaValida {
+    color: white;
+    background-color: green;
+    font-weight: 700;
+}
