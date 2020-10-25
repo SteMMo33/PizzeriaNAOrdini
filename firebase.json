@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "pizzeria-na-ordini",
     "public": "public",
     "ignore": [
       "firebase.json",

@@ -23,6 +23,12 @@ Project Console: https://console.firebase.google.com/project/pizzeria-nuova-auro
 Hosting URL: https://pizzeria-nuova-aurora.web.app
 
 
+Notifications
+-------------
+Per inviare notifiche 
+
+https://dev.to/thisdotmedia/pwa-push-notifications-with-firebase-cloud-messaging-pt1-10ak
+
 
 
 Codice
@@ -31,7 +37,7 @@ Codice
 TIP: To be installable, Chrome requires that you provide at least a 192x192px icon and a 512x512px icon. 
 But you can also provide other sizes. 
 Chrome uses the icon closest to 48dp, for example, 96px on a 2x device or 144px for a 3x device.
-Chrome ha indicato che l'appplicazione poteva essere installata quando ho aggiunto l'icona 144x144.
+Chrome ha indicato che l'applicazione poteva essere installata quando ho aggiunto l'icona 144x144.
 
 
 Basic off-line experience: pagina custom con messaggio.

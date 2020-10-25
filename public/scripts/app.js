@@ -481,7 +481,7 @@ function getMenuItems(item) {
 
 function init() {
     console.log('+init')
-    getMenuItems("pizze")
+    getMenuItems("pizze")   // Prima sezione visualizzata
     console.log('-init')
 }
 
