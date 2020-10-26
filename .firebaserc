@@ -1,5 +1,6 @@
 {
   "projects": {
-    "ordini": "pizzeria-nuova-aurora"
+    "ordini": "pizzeria-na-ordini",
+    "default": "pizzeria-na-ordini"
   }
 }

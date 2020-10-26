@@ -41,29 +41,29 @@
 </header>
 
 <p id='badge' class="new badge red" data-badge-caption="" 
-style='margin-right: 4px;border-radius: 8px;position: sticky; top: 0px; right:30px; z-index: 10; float: right; padding: 30px; color: white' 
+style='border-radius: 8px; position:fixed; top:0px; right:10px; z-index:10; float:right; padding:20px; color:white' 
 onclick="showOrdine()">In ordine: -</p>
 
-    <div class="pusha-panel pusha-panel--left" aria-hidden="true">
-      <div class="pusha-panel__content">
-        <img src='/images/logo300.jpg' style='width: 180px; margin: 15px auto;display:block;'>
-        <ul class="menu__list">
-          <li><a onclick="showHome('pizze');panel.close();"><i class="material-icons">local_pizza</i> Pizze</a></li>
-          <li><a onclick="showHome('speciali');panel.close();"><i class="material-icons">local_pizza</i> Pizze speciali</a></li>
-          <li><a onclick="showHome('calzoni');panel.close();"><i class="material-icons">local_pizza</i> Calzoni e pizze alte</a></li>
-          <li><a onclick="showHome('ristorante');panel.close();"><i class="material-icons">restaurant</i> Ristorante</a></li>
-          <li><a onclick="showHome('bevande');panel.close();"><i class="material-icons">local_bar</i> Bevande</a></li>
-          <li><a onclick="showContatti();panel.close();"><i class="material-icons">group</i> Contatti</a></li>
-        </ul>
-      </div>
+  <div class="pusha-panel pusha-panel--left" aria-hidden="true">
+    <div class="pusha-panel__content">
+      <img src='/images/logo300.jpg' style='width: 180px; margin: 15px auto;display:block;'>
+      <ul class="menu__list">
+        <li><a onclick="showHome('pizze');panel.close();"><i class="material-icons">local_pizza</i> Pizze</a></li>
+        <li><a onclick="showHome('speciali');panel.close();"><i class="material-icons">local_pizza</i> Pizze speciali</a></li>
+        <li><a onclick="showHome('calzoni');panel.close();"><i class="material-icons">local_pizza</i> Calzoni e pizze alte</a></li>
+        <li><a onclick="showHome('ristorante');panel.close();"><i class="material-icons">restaurant</i> Ristorante</a></li>
+        <li><a onclick="showHome('bevande');panel.close();"><i class="material-icons">local_bar</i> Bevande</a></li>
+        <li><a onclick="showContatti();panel.close();"><i class="material-icons">group</i> Contatti</a></li>
+      </ul>
     </div>
+  </div>
 
-    <script src="scripts/pusha.min.js"></script>
-    <script>
-      var panel = new Pusha('.pusha-panel--left', { closeOnClick: true });
+<script src="scripts/pusha.min.js"></script>
+<script>
+  var panel = new Pusha('.pusha-panel--left', { closeOnClick: true });
 
-      document.querySelector('.header__icon').addEventListener('click', panel.open);
-    </script>
+  document.querySelector('.header__icon').addEventListener('click', panel.open);
+</script>
 
   <!-- Home -->
   <div id='pageHome' class='page'>
@@ -155,7 +155,7 @@ onclick="showOrdine()">In ordine: -</p>
 	</div>
 
 	  <a class="waves-effect waves-light btn-large" onclick="showGiorni()">
-    <i class="material-icons right">cloud</i>Conferma ordine</a>
+    <i class="material-icons right">date_range</i>Continua con ordine</a>
     </div>
   </div>
 
@@ -175,7 +175,7 @@ onclick="showOrdine()">In ordine: -</p>
       <div id='gridFascia' style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
       </div>
     </div>
-    <button onclick='saveOrder()'>Fine ordine</button>
+    <!-- <button onclick='saveOrder()'>Fine ordine</button> -->
   </div>
 
   <!-- Pagina Contatti -->

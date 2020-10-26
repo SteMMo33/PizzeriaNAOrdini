@@ -20,7 +20,7 @@ Nella cartella pwa ho eseguito:
 
 
 Project Console: https://console.firebase.google.com/project/pizzeria-nuova-aurora/overview
-Hosting URL: https://pizzeria-nuova-aurora.web.app
+Hosting URL: https://pizzeria-na-ordini.web.app
 
 
 Notifications
@@ -42,7 +42,7 @@ Chrome ha indicato che l'applicazione poteva essere installata quando ho aggiunt
 
 Basic off-line experience: pagina custom con messaggio.
 
-Aggiunto un bottone di nome 'butInstall' per gestire l'installazione della appcome previsto in install.js
+Aggiunto un bottone di nome 'butInstall' per gestire l'installazione della app come previsto in install.js
 
 
 

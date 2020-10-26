@@ -67,7 +67,7 @@ function showOrdine()
 
 
 function giornoScelto(ev){
-    dataOrdine = ev.target.getAttribute('data')
+    dataOrdine = ev.target.getAttribute('data') // Salva in globale
     console.log("> GiornoScelto ", dataOrdine)
 
     showFascia()
@@ -122,9 +122,11 @@ function showGiorni(){
 
 
 function fasciaScelta(ev){
+    // Salva in variabili globali
     orarioOrdine = ev.target.getAttribute('data')
     fasciaOrdine = ev.target.getAttribute('fascia')
-    console.log("> Fascia: "+fascia+" - "+orarioOrdine)
+    console.log("> Fascia: "+fasciaOrdine+" - "+orarioOrdine)
+    saveOrder()
 }
 
 
@@ -139,21 +141,20 @@ async function contaPizzeOrdinate(){
 
     // console.log("orderList: ", orderList)
     orderList.forEach(
-            function(order){
-                var orderData = order.data()
+        function(order){
+            var orderData = order.data()
 
-                console.log(orderData)
-                if (typeof orderData.consegnaData === 'undefined') return
-                if (typeof orderData.consegnaOra === 'undefined') return
-                // if (typeof orderData.consegnaFascia === 'undefined') return
+            console.log(orderData)
+            if (typeof orderData.consegnaData === 'undefined') return
+            if (typeof orderData.consegnaOra === 'undefined') return
+            // if (typeof orderData.consegnaFascia === 'undefined') return
 
-                console.log("consData: ",orderData.consegnaData)
-                console.log("consOra: ",orderData.consegnaOra)
-                console.log("consFas: ", orderData.consegnaFascia)
+            console.log("consData: ",orderData.consegnaData)
+            console.log("consOra: ",orderData.consegnaOra)
+            //console.log("consFas: ", orderData.consegnaFascia)
 
-                pizzeOrdinate[1] = 5
-                pizzeOrdinate[orderData.consegnaOra] = 4
-            }
+            pizzeOrdinate[orderData.consegnaOra] = 4
+        }
     )
     console.log("Ordinate: ", pizzeOrdinate)
 }
@@ -172,24 +173,37 @@ async function showFascia(){
     await contaPizzeOrdinate()
     console.log("WWW")
 
-    while(i < 14){  // Per ogni fascia oraria
+    while(i < 14){  // Per ogni fascia oraria genera un div
 
         var hh = h.getHours() + ":" + (("0"+h.getMinutes()).slice(-2))
 
+        // Nuovo elemento
         var el = document.createElement("div")
         el.classList.add('collection-item')
         el.classList.add('fascia-item')
         el.append(hh)
-        if (typeof (pizzeOrdinate[i]) !== 'undefined')
-            el.append("<br>"+pizzeOrdinate[i])
+
+        if (typeof (pizzeOrdinate[hh]) === 'undefined')
+        pizzeOrdinate[hh] = 0
+
+        el.append(" ["+pizzeOrdinate[hh]+"]")
             
-        if (1){
+        if (pizzeOrdinate[hh] < 10){
             el.classList.add('fasciaValida')
             el.setAttribute('data', hh)
             el.setAttribute('fascia', i)
             el.addEventListener("click", fasciaScelta)
         }
-        el.onclick = saveOrder
+        else if (pizzeOrdinate[hh] < 15){
+            el.classList.add('fasciaWarn')
+            el.setAttribute('data', hh)
+            el.setAttribute('fascia', i)
+            el.addEventListener("click", fasciaScelta)
+        }
+        else {
+            el.classList.add('fasciaNonValida')
+        }
+        // el.onclick = saveOrder
 
         container.append(el)
 
@@ -197,7 +211,6 @@ async function showFascia(){
         ++i
         h.setMinutes( h.getMinutes()+15)
     }
-    console.log("EEE")
 
     // Cambio pagina
     document.getElementById('pageGiorno').style.display='none';
@@ -266,19 +279,12 @@ function updateBadge(n){
     })
     var el = document.querySelector('#badge')
     if (n < 1)
-        el.textContent = 'Vuoto'
+        el.textContent = 'In ordine: -'
     else
-        el.textContent = "In ordine "+n
+        el.textContent = "In ordine: "+n
 }
 
 
-
-function sendEmail(){
-    console.log('[sendEmail]')
-    emailSubject = "Ordine Nuova Aurora"
-    emailBody = "Ordine:\n1 cipolle + origano\n1 vetegale\n\nGrazie\n\n"
-    window.location.href = "mailto:stefano.mora@libero.it?subject=" + emailSubject + "&body=" + emailBody
-}
 
 function sendWA(){
     console.log('[sendWA]')
@@ -315,7 +321,7 @@ function saveOrder(){
         totale: totaleOrdine,
         consegnaData: dataOrdine,
         consegnaOra: orarioOrdine,
-        consegnaFascia: fasciaOrdine
+        // consegnaFascia: fasciaOrdine
       })
       .then(
          function(){

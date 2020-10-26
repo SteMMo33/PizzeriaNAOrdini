@@ -49,6 +49,11 @@ body {
     color: white;
 }
 
+.fasciaWarn {
+    background-color: yellow;
+    color: white;
+}
+
 .fasciaValida {
     color: white;
     background-color: green;
