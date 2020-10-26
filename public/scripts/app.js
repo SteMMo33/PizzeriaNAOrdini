@@ -128,7 +128,7 @@ function fasciaScelta(ev){
 }
 
 
-// Legge da DB la situazione pizze ordinate e aggiorna l'array pizzeOrdinte
+// Legge da DB la situazione delle pizze ordinate e aggiorna l'array pizzeOrdinte
 async function contaPizzeOrdinate(){
     pizzeOrdinate = new Array()
 
@@ -137,19 +137,25 @@ async function contaPizzeOrdinate(){
     // resRef.get().then( (orderList) => {
     var orderList = await resRef.get()
 
-        // console.log("orderList: ", orderList)
-        orderList.forEach(
+    // console.log("orderList: ", orderList)
+    orderList.forEach(
             function(order){
                 var orderData = order.data()
-                console.log(orderData)
 
-                console.log(orderData.consegnaData)
-                console.log(orderData.consegnaOra)
-                console.log(orderData.consegnaFascia)
+                console.log(orderData)
+                if (typeof orderData.consegnaData === 'undefined') return
+                if (typeof orderData.consegnaOra === 'undefined') return
+                // if (typeof orderData.consegnaFascia === 'undefined') return
+
+                console.log("consData: ",orderData.consegnaData)
+                console.log("consOra: ",orderData.consegnaOra)
+                console.log("consFas: ", orderData.consegnaFascia)
 
                 pizzeOrdinate[1] = 5
+                pizzeOrdinate[orderData.consegnaOra] = 4
             }
-        )
+    )
+    console.log("Ordinate: ", pizzeOrdinate)
 }
 
 
@@ -175,7 +181,7 @@ async function showFascia(){
         el.classList.add('fascia-item')
         el.append(hh)
         if (typeof (pizzeOrdinate[i]) !== 'undefined')
-            el.append(pizzeOrdinate[i])
+            el.append("<br>"+pizzeOrdinate[i])
             
         if (1){
             el.classList.add('fasciaValida')
@@ -183,8 +189,11 @@ async function showFascia(){
             el.setAttribute('fascia', i)
             el.addEventListener("click", fasciaScelta)
         }
+        el.onclick = saveOrder
+
         container.append(el)
 
+        // Prossima fascia
         ++i
         h.setMinutes( h.getMinutes()+15)
     }
@@ -259,7 +268,7 @@ function updateBadge(n){
     if (n < 1)
         el.textContent = 'Vuoto'
     else
-        el.textContent = "Ordine "+n
+        el.textContent = "In ordine "+n
 }
 
 
