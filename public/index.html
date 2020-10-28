@@ -142,21 +142,25 @@ onclick="showOrdine()">In ordine: -</p>
           </li>
 
       </ul>
-  </div>
- 
-  <div class="row" style="width: 85%; text-align: lefts;">
-    <div class="input-field" id='totaleOrdine'></div>
-  </div>
-
-  <div class="row" style="width: 85%; text-align: center;">
-	<div class="input-field">
-	  <input placeholder="Inserire il nome" id="orderName" type="text" class="validate">
-	  <label for="first_name">Nome</label>
-	</div>
-
-	  <a class="waves-effect waves-light btn-large" onclick="showGiorni()">
-    <i class="material-icons right">date_range</i>Continua con ordine</a>
     </div>
+ 
+    <div class="row" style="width: 85%; text-align: lefts;">
+      <div class="input-field" id='totaleOrdine'></div>
+    </div>
+
+    <div class="row" style="width: 85%; text-align: center;">
+      <div class="input-field">
+        <input placeholder="Inserire il nome" id="orderName" type="text" class="validate">
+        <label for="first_name">Nome</label>
+      </div>
+
+      <a class="waves-effect waves-light btn-large" onclick="showGiorni()">
+      <i class="material-icons right">date_range</i>Continua con ordine</a>
+      <br/>
+      <a class="waves-effect waves-light btn-large" onclick="showHome('pizze')">
+        <i class="material-icons right">chevron_left</i>Torna alla lista</a>
+    </div>
+
   </div>
 
   <!-- Pagina Scegli giorno -->
@@ -199,6 +203,7 @@ onclick="showOrdine()">In ordine: -</p>
       <h6>Aggiungi l'articolo:</h6>
       <h5 id='dlgAddNome' style='color:red'>Nome</h5>
       <input type='hidden' id='dlgAddIdx'>
+      <input type='hidden' id='dlgAddTipo'>
       <h1 style='text-align: center;color: red;padding: 20px 0' id='dlgAddNumero'>1</h1>
       <p style='text-align: center;'>
         <span onclick='aggiungi1()' style='padding: 5px 12px'>

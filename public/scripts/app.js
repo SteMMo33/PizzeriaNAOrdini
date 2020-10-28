@@ -231,10 +231,14 @@ function showDlgAddToOrder(e){
     }
     var idx = p.getAttribute('idx')
     var data = listaArticoli[idx]
+
     // Aggiorna i dati in dlg
     document.querySelector('#dlgAddIdx').val = idx
     document.querySelector('#dlgAddNumero').textContent = "1"
     document.querySelector('#dlgAddNome').textContent = data.nome
+    document.querySelector('#dlgAddTipo').val = p.getAttribute('tipo')
+    console.log(p.getAttribute('tipo'))
+
     // Apre la dlg
     var dlg = dlgAddToOrder[0]
     dlg.open()
@@ -256,15 +260,18 @@ function togli1(){
     }
 }
 
+
 function addToOrder(e){
     console.log("[addToOrder]")
 
     var idx = document.querySelector('#dlgAddIdx').val
     var articolo = listaArticoli[idx]
     articolo['qty'] = document.querySelector('#dlgAddNumero').textContent
+    articolo['tipo'] = document.querySelector('#dlgAddTipo').val
+
+    console.log(articolo)
 
     ordine.push(articolo)
-    // updateBadge(ordine.length)
     updateBadge(ordine.length)
 
     M.toast({ html:"Aggiunto all'ordine!"})

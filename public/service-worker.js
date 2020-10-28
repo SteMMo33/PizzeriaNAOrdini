@@ -9,7 +9,9 @@ const FILES_TO_CACHE = [
     '/images/tuttisfum.png',
     '/images/logo300.jpg',
     '/images/facebook-new.png',
-    '/images/instagram-new.png'
+    '/images/instagram-new.png',
+    '/scripts/app.js',
+    '/scripts/mesaging.js',
 ];
 
 
