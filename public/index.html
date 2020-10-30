@@ -154,10 +154,10 @@ onclick="showOrdine()">In ordine: -</p>
         <label for="first_name">Nome</label>
       </div>
 
-      <a class="waves-effect waves-light btn-large" onclick="showGiorni()">
+      <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="showGiorni()">
       <i class="material-icons right">date_range</i>Continua con ordine</a>
       <br/>
-      <a class="waves-effect waves-light btn-large" onclick="showHome('pizze')">
+      <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="showHome('pizze')">
         <i class="material-icons right">chevron_left</i>Torna alla lista</a>
     </div>
 
@@ -175,6 +175,7 @@ onclick="showOrdine()">In ordine: -</p>
   <!-- Pagina scegli fascia oraria -->
   <div id='pageFasciaOraria' class='page' style='display:none'>
     <div style='margin: 0px 10px 0 10px'>
+      <div id='giornoScelto' class='collection-item pink white-text'>Giorno</div>
       <div class='collection-item pink white-text'>Scegli la fascia oraria:</div>
       <div id='gridFascia' style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
       </div>

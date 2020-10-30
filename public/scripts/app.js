@@ -153,7 +153,15 @@ async function contaPizzeOrdinate(){
             console.log("consOra: ",orderData.consegnaOra)
             //console.log("consFas: ", orderData.consegnaFascia)
 
-            pizzeOrdinate[orderData.consegnaOra] = 4
+            var objOrdine = JSON.parse(orderData.ordine)
+            objOrdine.forEach(
+                function(ord){
+                    if (typeof pizzeOrdinate[orderData.consegnaOra]==='undefined')
+                        pizzeOrdinate[orderData.consegnaOra]=0
+                    if (ord.tipo=='pizze' || ord.tipo=='speciali')
+                        pizzeOrdinate[orderData.consegnaOra] += Number(ord.qty)
+                }
+            )
         }
     )
     console.log("Ordinate: ", pizzeOrdinate)
@@ -184,7 +192,7 @@ async function showFascia(){
         el.append(hh)
 
         if (typeof (pizzeOrdinate[hh]) === 'undefined')
-        pizzeOrdinate[hh] = 0
+            pizzeOrdinate[hh] = 0
 
         el.append(" ["+pizzeOrdinate[hh]+"]")
             
@@ -212,6 +220,9 @@ async function showFascia(){
         h.setMinutes( h.getMinutes()+15)
     }
 
+    // Mostra il giorno scelto
+    document.querySelector('#giornoScelto').textContent = "GIORNO: " +
+        dataOrdine.substring(6,8)+"-"+dataOrdine.substring(4,6)+"-"+dataOrdine.substring(0,4)
     // Cambio pagina
     document.getElementById('pageGiorno').style.display='none';
     document.getElementById('pageFasciaOraria').style.display='block';

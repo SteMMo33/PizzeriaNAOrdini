@@ -9,12 +9,12 @@ importScripts("https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js");
 */
 
 firebase.initializeApp({
-    messagingSenderId: "563548335074"
-  });
+  messagingSenderId: "563548335074"
+});
 
-  const messaging = firebase.messaging();
+const messaging = firebase.messaging();
 
-  messaging.setBackgroundMessageHandler(payload => {
+messaging.setBackgroundMessageHandler(payload => {
     const notification = JSON.parse(payload.data.notification);
     const notificationTitle = notification.title;
     const notificationOptions = {
@@ -25,4 +25,4 @@ firebase.initializeApp({
       notificationTitle,
       notificationOptions
     );
-  });
+});

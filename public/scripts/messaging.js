@@ -14,12 +14,13 @@ messaging.requestPermission().then(() => {
 })
 .then(token => {
     // tokenString.innerHTML = "Token Is : " + token;
-    console.log("Token Is : " + token)
+    console.log("Messaging Token Is : " + token)
 })
 .catch(err => {
         // errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;
         console.log("No permission to send push: ", err);
 });
+
 
 messaging.onMessage(payload => {
     console.log("Message received. ", payload);
@@ -27,7 +28,7 @@ messaging.onMessage(payload => {
 });
 
 
-
+// Callback push
 self.addEventListener('push', function(event) {
 
     console.info('Event: Push');
@@ -44,15 +45,16 @@ self.addEventListener('push', function(event) {
 });
 
 
+// Callback - notificationclick nella finestra di notifica
 self.addEventListener('notificationclick', function(event) {
 
     var url = './latest.html';
   
-    event.notification.close(); //Close the notification
+    event.notification.close(); // Close the notification
   
     // Open the app and navigate to latest.html after clicking the notification
     event.waitUntil(
       clients.openWindow(url)
-    );
-  
+    );  
 });
+
