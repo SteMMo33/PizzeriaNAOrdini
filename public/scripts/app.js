@@ -33,6 +33,15 @@ function showContatti()
     document.getElementById('pageOrdine').style.display='none';
 }
 
+function show(page)
+{
+    console.log("[show] "+page)
+    var els = document.querySelectorAll('.page')
+    for (var x = 0; x < els.length; x++)
+        els[x].style.display = 'none';
+    document.getElementById(page).style.display='block';
+}
+
 
 function showOrdine()
 {
@@ -55,14 +64,23 @@ function showOrdine()
         newSub.classList.add('addedOrder')
         newSub.querySelector('#templateOrdineTitle').textContent = val.nome
         newSub.querySelector('#templateOrdineNo').textContent = val.qty
+        newSub.querySelector('#menuIcon').setAttribute('item',idx) 
+
         document.querySelector('#mainListOrdine').appendChild(newSub)
         totaleOrdine += Number(val.qty)*Number(val.prezzo)
     })
     totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
 
     // Mostra pagina
-    document.getElementById('pageOrdine').style.display='block';
-    document.getElementById('pageHome').style.display='none';
+    //document.getElementById('pageOrdine').style.display='block';
+    //document.getElementById('pageHome').style.display='none';
+    show('pageOrdine')
+}
+
+
+function deleteItem(ev){
+    var idx = dataOrdine = ev.target.getAttribute('item')
+    console.log("> Cancello ", idx)
 }
 
 
@@ -303,17 +321,6 @@ function updateBadge(n){
 }
 
 
-
-function sendWA(){
-    console.log('[sendWA]')
-    var wa = "393471418401"
-    var text = JSON.stringify(ordine); // "Prova invio messaggio da PWA"
-    // window.open("https://api.whatsapp.com/send?phone="+wa+"&text="+text)
-    window.location.href("https://api.whatsapp.com/send?phone="+wa+"&text="+text)
-
-    M.toast({html: "Ordine inviato correttamente via WA"})
-    ResetOrder()
-}
 
 
 function saveOrder(){

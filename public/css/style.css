@@ -27,6 +27,8 @@ body {
     text-align: center;
     padding: 20px 5px;
     font-size: 2em;
+    border-radius: 15px;
+    margin: 5px;
 }
 
 .giorno-item {

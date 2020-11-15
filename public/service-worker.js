@@ -11,7 +11,7 @@ const FILES_TO_CACHE = [
     '/images/facebook-new.png',
     '/images/instagram-new.png',
     '/scripts/app.js',
-    '/scripts/mesaging.js',
+    '/scripts/messaging.js',
 ];
 
 

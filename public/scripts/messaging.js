@@ -14,16 +14,16 @@ messaging.requestPermission().then(() => {
 })
 .then(token => {
     // tokenString.innerHTML = "Token Is : " + token;
-    console.log("Messaging Token Is : " + token)
+    console.log("> Messaging Token Is : " + token)
 })
 .catch(err => {
-        // errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;
-        console.log("No permission to send push: ", err);
+    // errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;
+    console.error("No permission to send push: ", err);
 });
 
 
 messaging.onMessage(payload => {
-    console.log("Message received. ", payload);
+    console.log(">> Message received. ", payload);
     const { title, ...options } = payload.notification;
 });
 

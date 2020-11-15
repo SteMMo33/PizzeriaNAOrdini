@@ -135,6 +135,10 @@ onclick="showOrdine()">In ordine: -</p>
                 <td class="secondary-content" id='templateOrdineNo' 
                   style='width: 72px; text-align: right; font-weight: 800;font-size:20px; float:none'>${{N}}
                 </td>
+                <td class="secondary-content"
+                  style='width: 72px; text-align: right; font-weight: 800;font-size:20px; float:none'>
+                  <i id='menuIcon' class="material-icons" onclick='deleteItem(event)'>delete</i>
+                </td>
               </tr>
             </tbody>
             </table>
@@ -175,7 +179,7 @@ onclick="showOrdine()">In ordine: -</p>
   <!-- Pagina scegli fascia oraria -->
   <div id='pageFasciaOraria' class='page' style='display:none'>
     <div style='margin: 0px 10px 0 10px'>
-      <div id='giornoScelto' class='collection-item pink white-text'>Giorno</div>
+      <div id='giornoScelto' class='collection-item pink white-text' style='font-size: 1.2em; margin: 4px 0;'>Giorno</div>
       <div class='collection-item pink white-text'>Scegli la fascia oraria:</div>
       <div id='gridFascia' style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
       </div>
