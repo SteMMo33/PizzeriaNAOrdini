@@ -15,8 +15,7 @@ var pizzeOrdinate   // Array per ogni fascia con il totale pizze già ordinate
 function showHome(item)
 {
     console.log('showHome '+item)
-    document.getElementById('pageContatti').style.display='none';
-    document.getElementById('pageOrdine').style.display='none';
+    hidePages()
     document.getElementById('pageHome').style.display='block';
     getMenuItems(item)
 }
@@ -28,17 +27,22 @@ function showHome(item)
 function showContatti()
 {
     console.log('showContatti')
+    hidePages()
     document.getElementById('pageContatti').style.display='block';
-    document.getElementById('pageHome').style.display='none';
-    document.getElementById('pageOrdine').style.display='none';
 }
+
+function hidePages()
+{
+    var els = document.querySelectorAll('.page')
+    for (var x = 0; x < els.length; x++)
+        els[x].style.display = 'none';
+}
+
 
 function show(page)
 {
     console.log("[show] "+page)
-    var els = document.querySelectorAll('.page')
-    for (var x = 0; x < els.length; x++)
-        els[x].style.display = 'none';
+    hidePages()
     document.getElementById(page).style.display='block';
 }
 
@@ -72,9 +76,40 @@ function showOrdine()
     totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
 
     // Mostra pagina
-    //document.getElementById('pageOrdine').style.display='block';
-    //document.getElementById('pageHome').style.display='none';
     show('pageOrdine')
+}
+
+
+function showRiepilogo()
+{
+    console.log('showRiepilogo')
+    if (fasciaOrdine==-1){
+        M.toast({html: "Seleziona un orario"})
+        return
+    }
+    // Svuota eventuale lista precedente
+    document.querySelectorAll('.addedOrder').forEach( e => e.remove())
+    // Riempie la pagina Riepilogo
+
+    totaleOrdine = 0;
+    ordine.forEach( function( val, idx){
+        var newSub = document.querySelector('#templateRiepilogo').cloneNode(true);
+        newSub.style.display='block'
+        newSub.classList.add('addedOrder')
+        newSub.querySelector('#templateRieTitle').textContent = val.nome
+        newSub.querySelector('#templateRieNo').textContent = val.qty
+
+        document.querySelector('#mainListRiepilogo').appendChild(newSub)
+        totaleOrdine += Number(val.qty)*Number(val.prezzo)
+    })
+    var totaleDiv = document.querySelector('#totaleRiepilogo');
+    totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
+    document.querySelector('#nomeRiepilogo').innerHTML = "Nome: <b>"+nome+"</b>"
+    document.querySelector('#giornoOrdine').innerHTML = "Giorno: <b>"+dataOrdine+"</b>"
+    document.querySelector('#orarioOrdine').innerHTML = "Orario: <b>"+orarioOrdine+"</b>"
+
+    // Mostra pagina
+    show('pageRiepilogo')
 }
 
 
@@ -95,7 +130,7 @@ function giornoScelto(ev){
 function showGiorni(){
 
     // Controllo nome inserito dall'utente
-    var nome = document.querySelector("#orderName").value;
+    nome = document.querySelector("#orderName").value;
     if(nome==""){
         M.toast({html:"Il nome è obbligatorio"});
         return;
@@ -140,11 +175,15 @@ function showGiorni(){
 
 
 function fasciaScelta(ev){
+    var el = ev.target
     // Salva in variabili globali
-    orarioOrdine = ev.target.getAttribute('data')
     fasciaOrdine = ev.target.getAttribute('fascia')
-    console.log("> Fascia: "+fasciaOrdine+" - "+orarioOrdine)
-    saveOrder()
+    if (fasciaOrdine >= 0){
+        orarioOrdine = ev.target.getAttribute('data')
+        console.log("> Fascia: "+fasciaOrdine+" - "+orarioOrdine)
+        // saveOrder()
+        ev.target.style.borderStyle = "solid"
+    }
 }
 
 
@@ -153,7 +192,7 @@ async function contaPizzeOrdinate(){
     pizzeOrdinate = new Array()
 
     // Lista ordini
-    var resRef = firebase.firestore().collection("ordini");
+    var resRef = firebase.firestore().collection("ordini")
     // resRef.get().then( (orderList) => {
     var orderList = await resRef.get()
 
@@ -163,6 +202,8 @@ async function contaPizzeOrdinate(){
             var orderData = order.data()
 
             console.log(orderData)
+
+            // Deve esserci data ed ora di consegna
             if (typeof orderData.consegnaData === 'undefined') return
             if (typeof orderData.consegnaOra === 'undefined') return
             // if (typeof orderData.consegnaFascia === 'undefined') return
@@ -199,6 +240,11 @@ async function showFascia(){
     await contaPizzeOrdinate()
     console.log("WWW")
 
+    // Cancello le precedenti
+    var hh = document.querySelectorAll(".fascia-item")
+    hh.forEach( (val, key) => val.remove())
+
+    fasciaOrdine = -1
     while(i < 14){  // Per ogni fascia oraria genera un div
 
         var hh = h.getHours() + ":" + (("0"+h.getMinutes()).slice(-2))
@@ -229,8 +275,6 @@ async function showFascia(){
         else {
             el.classList.add('fasciaNonValida')
         }
-        // el.onclick = saveOrder
-
         container.append(el)
 
         // Prossima fascia
@@ -313,11 +357,11 @@ function updateBadge(n){
     ordine.forEach( (value) => {
         n += Number(value.qty)
     })
-    var el = document.querySelector('#badge')
+    var el = document.querySelector('#nArticoli')
     if (n < 1)
-        el.textContent = 'In ordine: -'
+        el.textContent = '-'
     else
-        el.textContent = "In ordine: "+n
+        el.textContent = n
 }
 
 

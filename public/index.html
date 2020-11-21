@@ -41,8 +41,8 @@
 </header>
 
 <p id='badge' class="new badge red" data-badge-caption="" 
-style='border-radius: 8px; position:fixed; top:0px; right:10px; z-index:10; float:right; padding:20px; color:white' 
-onclick="showOrdine()">In ordine: -</p>
+style='border-radius: 8px; position:fixed; top:-4px; right:6px; z-index:10; float:right; padding:15px; color:white' 
+onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id='nArticoli'>-</span></p>
 
   <div class="pusha-panel pusha-panel--left" aria-hidden="true">
     <div class="pusha-panel__content">
@@ -184,7 +184,8 @@ onclick="showOrdine()">In ordine: -</p>
       <div id='gridFascia' style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
       </div>
     </div>
-    <!-- <button onclick='saveOrder()'>Fine ordine</button> -->
+    <div class='button' onclick='showRiepilogo()'>Fine ordine</div>
+    <div class='button' onclick='showOrdine()'>Torna all'ordine</div>
   </div>
 
   <!-- Pagina Contatti -->
@@ -202,6 +203,64 @@ onclick="showOrdine()">In ordine: -</p>
     </div>
   </div>
 
+    <!-- Pagina riepilogo -->
+    <div id='pageRiepilogo' style='display:none' class='page'>
+        
+      <div class="container">  
+        <ul class="collection with-header" id='mainListRiepilogo'>
+  
+            <li class="collection-item pink white-text">
+              <i id='menuIcon' class="material-icons">format_list_bulleted</i>
+              <span id='menuTitle' style='text-align: center;font-weight: 700;'>ORDINE</span>
+            </li>
+            
+            <!-- Template Ordine -->
+            <li class="collection-item" id="templateRiepilogo" style="display:none">
+              <div>
+                <table><tbody>
+                  <tr style='border:none'>
+                  <td>
+                    <span id='templateRieTitle' style='font-weight: 700;'>{{item.title}}</span>
+                  </td>
+                  <td class="secondary-content" id='templateRieNo' 
+                    style='width: 72px; text-align: right; font-weight: 800;font-size:20px; float:none'>${{N}}
+                  </td>
+                </tr>
+              </tbody>
+              </table>
+              </div>
+            </li>
+  
+            <li class="collection-item pink white-text">
+              <div style="width: 85%; text-align: lefts;">
+                <div class="input-field" id='totaleRiepilogo'></div>
+              </div>
+              <div style="width: 85%; text-align: lefts;">
+                <div class="input-field" id='nomeRiepilogo'></div>
+              </div>
+              <div style="width: 85%; text-align: lefts;">
+                <div class="input-field" id='giornoOrdine'></div>
+              </div>
+              <div style="width: 85%; text-align: lefts;">
+                <div class="input-field" id='orarioOrdine'></div>
+              </div>
+        
+            </li>
+        </ul>
+      </div>
+   
+  
+      <div class="row" style="width: 85%; text-align: center;">
+        <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="saveOrder()">
+        <i class="material-icons right">cloud_upload</i>Invia l'ordine</a>
+        <br/>
+        <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="showOrdine()">
+          <i class="material-icons right">chevron_left</i>Torna all'ordine</a>
+      </div>
+  
+    </div>
+
+    
   <!-- Modal Dlg Structure -->
   <div id="dlgAddItem" class="modal">
     <div class="modal-content">

@@ -25,7 +25,7 @@ Hosting URL: https://pizzeria-na-ordini.web.app
 
 Notifications
 -------------
-Per inviare notifiche 
+Per ricevere notifiche 
 
 https://dev.to/thisdotmedia/pwa-push-notifications-with-firebase-cloud-messaging-pt1-10ak
 
@@ -50,19 +50,6 @@ Impostazioni
 ------------
 I settings dell'applicazione vengono salvati in localStorage
 
-
-Comunicazione con database
---------------------------
-Firestore
-
-
-
-Menu laterale
--------------
-https://github.com/slavanga/pusha
-
-Stili:
-https://github.com/unicodeveloper/pwa-commits/blob/master/public/css/style.css
 
 
 Debug

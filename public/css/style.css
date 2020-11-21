@@ -60,4 +60,14 @@ body {
     color: white;
     background-color: green;
     font-weight: 700;
+    border-color: tomato;
+}
+
+.button {
+    text-align: center;
+    margin: 8px;
+    background-color: antiquewhite;
+    padding: 10px 5px;
+    font-size: 1.2em;
+    font-weight: 700;
 }
