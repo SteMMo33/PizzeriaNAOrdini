@@ -52,7 +52,7 @@ body {
 }
 
 .fasciaWarn {
-    background-color: yellow;
+    background-color: orange;
     color: white;
 }
 
@@ -61,6 +61,7 @@ body {
     background-color: green;
     font-weight: 700;
     border-color: tomato;
+    border-width: thick;
 }
 
 .button {
@@ -70,4 +71,9 @@ body {
     padding: 10px 5px;
     font-size: 1.2em;
     font-weight: 700;
+}
+
+#versione {
+    color: lightgray;
+    padding: 0 15px;
 }

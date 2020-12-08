@@ -4,7 +4,7 @@
  * Il SDK di firebase si aspetta esattamente questo file
  */
 const messaging = firebase.messaging();
-
+var gToken = ""
 
 // Messaging
 messaging.requestPermission().then(() => {
@@ -14,7 +14,8 @@ messaging.requestPermission().then(() => {
 })
 .then(token => {
     // tokenString.innerHTML = "Token Is : " + token;
-    console.log("> Messaging Token Is : " + token)
+    console.log("> Messaging Token: " + token)
+    gToken = token
 })
 .catch(err => {
     // errorMessage.innerHTML = errorMessage.innerHTML + "; " + err;

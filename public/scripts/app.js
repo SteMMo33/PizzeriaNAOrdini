@@ -4,7 +4,7 @@ var listaArticoli = new Array()
 var totaleOrdine = 0
 var nome = ""
 
-var dataOrdine      // Data YYYYMMDD
+var dataOrdine      // Data consegna YYYYMMDD
 var orarioOrdine    // Orario XX:YY
 var fasciaOrdine    // 1..14
 var pizzeOrdinate   // Array per ogni fascia con il totale pizze già ordinate
@@ -17,7 +17,7 @@ function showHome(item)
     console.log('showHome '+item)
     hidePages()
     document.getElementById('pageHome').style.display='block';
-    getMenuItems(item)
+    if (item) getMenuItems(item)
 }
 
 
@@ -105,23 +105,30 @@ function showRiepilogo()
     var totaleDiv = document.querySelector('#totaleRiepilogo');
     totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
     document.querySelector('#nomeRiepilogo').innerHTML = "Nome: <b>"+nome+"</b>"
-    document.querySelector('#giornoOrdine').innerHTML = "Giorno: <b>"+dataOrdine+"</b>"
+    document.querySelector('#giornoOrdine').innerHTML = "Giorno: <b>"+dataOrdine.substring(6,8)+"-"+dataOrdine.substring(4,6)+"-"+dataOrdine.substring(0,4)+"</b>"
     document.querySelector('#orarioOrdine').innerHTML = "Orario: <b>"+orarioOrdine+"</b>"
 
     // Mostra pagina
     show('pageRiepilogo')
 }
 
-
+/**
+ * Cancella un elemento dell'ordine
+ * @param {} ev 
+ */
 function deleteItem(ev){
     var idx = dataOrdine = ev.target.getAttribute('item')
     console.log("> Cancello ", idx)
+    ordine.splice(idx,1)
+    if (ordine.length)
+        showOrdine()
+    else showHome()
 }
 
 
 function giornoScelto(ev){
     dataOrdine = ev.target.getAttribute('data') // Salva in globale
-    console.log("> GiornoScelto ", dataOrdine)
+    console.log("> dataOrdine: ", dataOrdine)
 
     showFascia()
 }
@@ -175,6 +182,8 @@ function showGiorni(){
 
 
 function fasciaScelta(ev){
+    document.querySelectorAll('.fascia-item').forEach((el)=>el.style.borderStyle = "none")
+
     var el = ev.target
     // Salva in variabili globali
     fasciaOrdine = ev.target.getAttribute('fascia')
@@ -187,12 +196,12 @@ function fasciaScelta(ev){
 }
 
 
-// Legge da DB la situazione delle pizze ordinate e aggiorna l'array pizzeOrdinte
+// Legge da DB la situazione delle pizze ordinate e aggiorna l'array pizzeOrdinate
 async function contaPizzeOrdinate(){
-    pizzeOrdinate = new Array()
+    pizzeOrdinate = new Array() // reset
 
     // Lista ordini
-    var resRef = firebase.firestore().collection("ordini")
+    var resRef = firebase.firestore().collection("ordini").where("consegnaData","==",dataOrdine)
     // resRef.get().then( (orderList) => {
     var orderList = await resRef.get()
 
@@ -258,7 +267,7 @@ async function showFascia(){
         if (typeof (pizzeOrdinate[hh]) === 'undefined')
             pizzeOrdinate[hh] = 0
 
-        el.append(" ["+pizzeOrdinate[hh]+"]")
+        // el.append(" ["+pizzeOrdinate[hh]+"]")
             
         if (pizzeOrdinate[hh] < 10){
             el.classList.add('fasciaValida')
@@ -368,7 +377,7 @@ function updateBadge(n){
 
 
 function saveOrder(){
-    console.log('[saveOrder]', ordine)
+    console.log('[+saveOrder]', ordine)
 
     // Controllo nome
     var nome = document.querySelector("#orderName").value;
@@ -379,18 +388,18 @@ function saveOrder(){
     ordine['nome']=nome
 
     var dbOrdini = firebase.firestore().collection("ordini")
-    var id = Date.now().toString(); // dbOrdini.createId();
+    var id = Date.now().toString();
 
     // Scrittura record
     dbOrdini.doc(id).set({
-        ordine: JSON.stringify(ordine), // "Ordine",
+        ordine: JSON.stringify(ordine),
         nome: nome,
 		data: firebase.firestore.FieldValue.serverTimestamp(),
         servito: false,
         totale: totaleOrdine,
         consegnaData: dataOrdine,
         consegnaOra: orarioOrdine,
-        // consegnaFascia: fasciaOrdine
+        token: gToken
       })
       .then(
          function(){
@@ -404,7 +413,7 @@ function saveOrder(){
             console.error("[saveOrder] ", error)
         }
     );
-  console.log('[saveOrder]')
+  console.log('[-saveOrder]')
 }
 
 

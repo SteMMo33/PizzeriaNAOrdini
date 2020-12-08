@@ -47,6 +47,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <div class="pusha-panel pusha-panel--left" aria-hidden="true">
     <div class="pusha-panel__content">
       <img src='/images/logo300.jpg' style='width: 180px; margin: 15px auto;display:block;'>
+      <div id='versione'>Versione: 0.1</div>
       <ul class="menu__list">
         <li><a onclick="showHome('pizze');panel.close();"><i class="material-icons">local_pizza</i> Pizze</a></li>
         <li><a onclick="showHome('speciali');panel.close();"><i class="material-icons">local_pizza</i> Pizze speciali</a></li>
@@ -163,7 +164,9 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
       <br/>
       <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="showHome('pizze')">
         <i class="material-icons right">chevron_left</i>Torna alla lista</a>
-    </div>
+        <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="ResetOrder();showHome('pizze')">
+          <i class="material-icons right">cancel</i>Cancella ordine</a>
+      </div>
 
   </div>
 
@@ -179,12 +182,12 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <!-- Pagina scegli fascia oraria -->
   <div id='pageFasciaOraria' class='page' style='display:none'>
     <div style='margin: 0px 10px 0 10px'>
-      <div id='giornoScelto' class='collection-item pink white-text' style='font-size: 1.2em; margin: 4px 0;'>Giorno</div>
-      <div class='collection-item pink white-text'>Scegli la fascia oraria:</div>
+      <div id='giornoScelto' class='collection-item pink white-text' style='font-size: 1.2em; margin: 4px 0; padding: 5px'>Giorno</div>
+      <div class='collection-item pink white-text' style='padding: 5px'>Scegli la fascia oraria:</div>
       <div id='gridFascia' style="display:grid; grid-template-columns: 1fr 1fr 1fr;">
       </div>
     </div>
-    <div class='button' onclick='showRiepilogo()'>Fine ordine</div>
+    <div class='button' onclick='showRiepilogo()'>Riepilogo ..</div>
     <div class='button' onclick='showOrdine()'>Torna all'ordine</div>
   </div>
 
@@ -285,7 +288,6 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
     
 <!-- Add the install script here -->
 <script src="/scripts/install.js"></script>
-<!-- <script src="/scripts/menu.js"></script> -->
 
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src="scripts/materialize.min.js"></script>
@@ -317,9 +319,6 @@ if ('serviceWorker' in navigator) {
 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-messaging.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
 
 <script>
