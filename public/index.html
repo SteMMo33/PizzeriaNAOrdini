@@ -69,8 +69,8 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <!-- Home -->
   <div id='pageHome' class='page'>
 
-    <div>
-      <button id='butInstall' style='width: 200px;margin: 0 auto' hidden>Installa app</button>
+    <div style='text-align: center;'>
+      <button id='butInstall' style='width: 200px;margin: 0 auto' hidden>Installa l'app</button>
     </div>
 
     <div class="container">
@@ -164,8 +164,8 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
       <br/>
       <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="showHome('pizze')">
         <i class="material-icons right">chevron_left</i>Torna alla lista</a>
-        <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="ResetOrder();showHome('pizze')">
-          <i class="material-icons right">cancel</i>Cancella ordine</a>
+      <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="ResetOrder();showHome('pizze')">
+        <i class="material-icons right">cancel</i>Cancella ordine</a>
       </div>
 
   </div>
@@ -247,11 +247,9 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
               <div style="width: 85%; text-align: lefts;">
                 <div class="input-field" id='orarioOrdine'></div>
               </div>
-        
             </li>
         </ul>
-      </div>
-   
+      </div>   
   
       <div class="row" style="width: 85%; text-align: center;">
         <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="saveOrder()">
@@ -263,6 +261,16 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   
     </div>
 
+    <!-- Pagina finale -->
+    <div id='pageFinale' style='display:none' class='page'>
+      <div class="container" style='text-align: center;''>  
+        <img style='margin: 10px 0;' src="./images/ok.png">
+        <div style='text-align: center;font-weight: 700;font-size: large;padding: 25px 0;'>GRAZIE PER L'ORDINE</div>
+        <div style='text-align: center;margin: 25px 10px;'>Ti arriver&agrave; un messaggio quando la pizza sar&agrave; pronta!</div>
+        <a class="waves-effect waves-light btn-large" style="margin:5px" onclick="ResetOrder();showHome('pizze')">
+          <i class="material-icons right">chevron_left</i>Torna alla lista</a>
+      </div>
+    </div>   
     
   <!-- Modal Dlg Structure -->
   <div id="dlgAddItem" class="modal">

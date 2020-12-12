@@ -1,6 +1,6 @@
 {
     "name": "Pizzeria Nuova Aurora",
-    "short_name": "Pizzeria Nuova Aurora Ordini",
+    "short_name": "Ordii Pizzeria Nuova Aurora",
     "description": "App per fare ordini alla Pizzeria Nuova Aurora",
     "icons": [{
       "src": "/images/icons/logo128.png",

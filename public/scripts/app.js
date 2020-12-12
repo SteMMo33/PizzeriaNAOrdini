@@ -142,8 +142,12 @@ function showGiorni(){
         M.toast({html:"Il nome è obbligatorio"});
         return;
     }
-    
-    // Crea llista dei giorni con i nomi appropriati
+
+    // Cancella precedenti
+    var hh = document.querySelectorAll(".giorno-item")
+    hh.forEach( (val, key) => val.remove())
+
+    // Crea la lista dei giorni con i nomi appropriati
     var gg = [ "DOM", "LUN", "MAR", "MER", "GIO", "VEN", "SAB"]
     var container = document.querySelector('#listaGiorni')
     var now = new Date()
@@ -404,8 +408,9 @@ function saveOrder(){
       .then(
          function(){
             console.log("[saveOrder] OK")
-            M.toast({html: "Ordine inviato correttamente"})
-            setTimeout( function(){ResetOrder(); showHome('pizze')}, 4000);
+            //M.toast({html: "Ordine inviato correttamente"})
+            //setTimeout( function(){ResetOrder(); showHome('pizze')}, 4000);
+            show('pageFinale')
          }
       )
       .catch(
