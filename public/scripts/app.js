@@ -142,6 +142,7 @@ function showGiorni(){
         M.toast({html:"Il nome è obbligatorio"});
         return;
     }
+    else localStorage.setItem("name", nome)
 
     // Cancella precedenti
     var hh = document.querySelectorAll(".giorno-item")
@@ -580,6 +581,10 @@ function getMenuItems(item) {
 function init() {
     console.log('+init')
     getMenuItems("pizze")   // Prima sezione visualizzata
+
+    let tmp = localStorage.getItem('name');
+    if (tmp) document.querySelector('#orderName').value = tmp;
+
     console.log('-init')
 }
 
