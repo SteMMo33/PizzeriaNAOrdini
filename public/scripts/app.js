@@ -57,9 +57,10 @@ function showOrdine()
     // Svuota eventuale lista precedente
     document.querySelectorAll('.addedOrder').forEach( e => e.remove())
     // Riempie la pagina Ordine
-    var template = document.querySelector('#templateOrdine');
-    var list = document.querySelector('#mainListOrdine');
+    // var template = document.querySelector('#templateOrdine');
+    // var list = document.querySelector('#mainListOrdine');
     var totaleDiv = document.querySelector('#totaleOrdine');
+    var modifiche = 0;
 
     totaleOrdine = 0;
     ordine.forEach( function( val, idx){
@@ -67,6 +68,11 @@ function showOrdine()
         newSub.style.display='block'
         newSub.classList.add('addedOrder')
         newSub.querySelector('#templateOrdineTitle').textContent = val.nome
+        if (val.modifiche) {
+            newSub.querySelector('#templateOrdineModif').innerHTML = "<br>"+val.modifiche
+            newSub.querySelector('#templateOrdineModif').style.display = 'block'
+            ++modifiche;
+        }
         newSub.querySelector('#templateOrdineNo').textContent = val.qty
         newSub.querySelector('#menuIcon').setAttribute('item',idx) 
 
@@ -74,6 +80,7 @@ function showOrdine()
         totaleOrdine += Number(val.qty)*Number(val.prezzo)
     })
     totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
+    if (modifiche>0) totaleDiv.innerHTML += "<br><span style='color:red'>* Le modifiche potrebbero comportare un diverso prezzo finale *</span>"
 
     // Mostra pagina
     show('pageOrdine')
@@ -324,6 +331,8 @@ function showDlgAddToOrder(e){
     document.querySelector('#dlgAddNumero').textContent = "1"
     document.querySelector('#dlgAddNome').textContent = data.nome
     document.querySelector('#dlgAddTipo').val = p.getAttribute('tipo')
+    document.querySelector('#dlgModifiche').value = ""
+
     console.log(p.getAttribute('tipo'))
 
     // Apre la dlg
@@ -355,6 +364,9 @@ function addToOrder(e){
     var articolo = listaArticoli[idx]
     articolo['qty'] = document.querySelector('#dlgAddNumero').textContent
     articolo['tipo'] = document.querySelector('#dlgAddTipo').val
+
+    var mod = document.querySelector('#dlgModifiche')
+    if (mod.value) articolo['modifiche'] = mod.value
 
     console.log(articolo)
 
@@ -466,7 +478,7 @@ function InsertItem(datalist, item, tipo){
         newSub.style.display='block'
         document.querySelector('#mainList').appendChild(newSub);
     }
-
+    // Lista articoli
     datalist.forEach( dataraw => {
         var data = dataraw.data()
         // In Memoria

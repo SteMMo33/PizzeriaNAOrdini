@@ -64,7 +64,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   document.querySelector('.header__icon').addEventListener('click', panel.open);
 </script>
 
-  <!-- Home -->
+  <!-- Home con lista articoli -->
   <div id='pageHome' class='page'>
 
     <div style='text-align: center;'>
@@ -91,7 +91,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
               <table><tbody>
                 <tr style='border:none'>
                 <td>
-                  <span id='templateTitle' style='font-weight: 700;'>{{item.title}}</span>
+                  <span id='templateTitle' style='font-weight: 700;'>{{title}}</span>
                   <br />
                   <span class="grey-text" id='templateDesc'>{{description}}</span>
                 </td>
@@ -129,7 +129,8 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
               <table><tbody>
                 <tr style='border:none'>
                 <td>
-                  <span id='templateOrdineTitle' style='font-weight: 700;'>{{item.title}}</span>
+                  <span id='templateOrdineTitle' style='font-weight: 700;'>Nome</span>
+                  <span id='templateOrdineModif' style='display:none; font-size: smaller;line-height: 0.8rem;'></span>
                 </td>
                 <td class="secondary-content" id='templateOrdineNo' 
                   style='width: 72px; text-align: right; font-weight: 800;font-size:20px; float:none'>${{N}}
@@ -153,7 +154,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
 
     <div class="row" style="width: 85%; text-align: center;">
       <div class="input-field">
-        <input placeholder="Inserire il nome" id="orderName" type="text" class="validate">
+        <input placeholder="Inserire un nome" id="orderName" type="text" class="validate">
         <label for="first_name">Nome</label>
       </div>
 
@@ -271,19 +272,21 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
     </div>   
     
   <!-- Modal Dlg Structure -->
-  <div id="dlgAddItem" class="modal">
+  <div id="dlgAddItem" class="modal" style='border-radius: 8px; max-height: 75%;'>
     <div class="modal-content">
-      <h6>Aggiungi l'articolo:</h6>
-      <h5 id='dlgAddNome' style='color:red'>Nome</h5>
+      <h6>Aggiungi:</h6>
+      <h6 id='dlgAddNome' style='color:red'>Nome</h6>
       <input type='hidden' id='dlgAddIdx'>
       <input type='hidden' id='dlgAddTipo'>
-      <h1 style='text-align: center;color: red;padding: 20px 0' id='dlgAddNumero'>1</h1>
+      <h1 style='text-align: center;padding: 15px 0' id='dlgAddNumero'>1</h1>
       <p style='text-align: center;'>
-        <span onclick='aggiungi1()' style='padding: 5px 12px'>
-          <i id='menuIcon' class="large material-icons">add_circle</i></span>
-        <span onclick='togli1()' style='padding: 5px 12px'>
-          <i id='menuIcon' class="large material-icons">do_not_disturb_on</i></span>
+        <span onclick='aggiungi1()' style='padding: 5px 12px; color:green'>
+          <i id='menuIconP' class="large material-icons">add_circle</i></span>
+        <span onclick='togli1()' style='padding: 5px 12px; color:red'>
+          <i id='menuIconM' class="large material-icons">do_not_disturb_on</i></span>
       </p>
+      <p>Modifiche/note</p><p style='font-size: smaller;'>*potrebbero comportare variazioni di prezzo rispetto a quanto mostrato</p>
+      <input id='dlgModifiche'>
     </div>
     <div class="modal-footer">
       <a href="#!" onclick='addToOrder(event)' class="modal-close waves-effect waves-green btn-flat">Aggiungi</a>
@@ -305,7 +308,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
 var dlgAddToOrder
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
-    var options = {}
+    var options = { maxHeight:"75%" }
     dlgAddToOrder = M.Modal.init(elems, options);
 });
 
