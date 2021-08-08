@@ -80,7 +80,7 @@ function showOrdine()
         totaleOrdine += Number(val.qty)*Number(val.prezzo)
     })
     totaleDiv.innerHTML = "Totale ordine: <b>&euro; "+totaleOrdine.toFixed(2)+"</b>"
-    if (modifiche>0) totaleDiv.innerHTML += "<br><span style='color:red'>* Le modifiche potrebbero comportare un diverso prezzo finale *</span>"
+    if (modifiche>0) totaleDiv.innerHTML += "<p style='color:red;text-align:center;'>Le note/modifiche indicate potrebbero comportare un prezzo diverso da quello indicato</p>"
 
     // Mostra pagina
     show('pageOrdine')
@@ -164,7 +164,7 @@ function showGiorni(){
         var el = document.createElement("li")
         el.classList.add('collection-item')
         el.classList.add('giorno-item')
-        el.style.padding = "25px 5px"
+        el.style.padding = "25px 5px"   // Altrimenti vince lo stile collection-item
         el.append(gg[now.getDay()] +" "+now.toLocaleDateString('it-IT', { day:'numeric', month:'long', year:'numeric'}))
 
         // Disabilita il martedì

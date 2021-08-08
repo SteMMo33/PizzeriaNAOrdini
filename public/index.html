@@ -24,9 +24,10 @@
 
 <body>
 
+  <!-- Intestazione pagina -->
   <header class="header-fixed pusha-push">
     <span class="header__icon">
-      <svg class="menu__icon no--select" width="24px" height="24px" viewBox="0 0 48 48" fill="#f90">
+      <svg class="menu__icon no--select" width="24px" height="24px" viewBox="0 0 48 48" fill="#f70">
         <path d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"></path>
       </svg>
     </span>
@@ -34,10 +35,11 @@
   <div class="pusha-wrapper" style='color: #fff; top: -58px;
   font-size: 20px;  -ms-flex-item-align: center;  -ms-grid-row-align: center;
   align-self: center; margin-left: 55px;'>
-    <p>NUOVA AURORA Ordini</p>
+    <p>Nuova Aurora - Ordini</p>
   </div>
-</header>
+  </header>
 
+<!-- Bottone contatore elementi in ordine -->
 <p id='badge' class="new badge red" data-badge-caption="" 
 style='border-radius: 8px; position:fixed; top:-4px; right:6px; z-index:10; float:right; padding:15px; color:white' 
 onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id='nArticoli'>-</span></p>
@@ -45,7 +47,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <div class="pusha-panel pusha-panel--left" aria-hidden="true">
     <div class="pusha-panel__content">
       <img src='/images/logo300.jpg' style='width: 180px; margin: 15px auto;display:block;'>
-      <div id='versione'>Versione: 0.1</div>
+      <div id='versione'>Versione: 0.2</div>
       <ul class="menu__list">
         <li><a onclick="showHome('pizze');panel.close();"><i class="material-icons">local_pizza</i> Pizze</a></li>
         <li><a onclick="showHome('speciali');panel.close();"><i class="material-icons">local_pizza</i> Pizze speciali</a></li>
@@ -96,7 +98,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
                   <span class="grey-text" id='templateDesc'>{{description}}</span>
                 </td>
                 <td class="secondary-content" id='templatePrice' 
-                  style='width: 72px; text-align: right; font-weight: 800;font-size:20px; float:none'>${{price}}
+                  style='width: 72px; text-align: right; font-weight: 700;font-size:16px; float:none'>${{price}}
                 </td>
                 <td id='templatePlus' style='text-align: right;'>
                   <i id='menuIcon' class="material-icons">add_circle</i>
@@ -195,8 +197,11 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
     <img src='images/tuttisfum.png' style='width:100%'>
     <div style='margin: 0px 10px 0 10px'>
       <table>
-        <tr><td colspan='2'>Pizzeria <b>Nuova Aurora</b></td></tr>
-        <tr><td colspan='2'>Indirizzo: Via Capelli, 1 <br> 43035 Felino - Parma - Italia</td></tr>
+        <!-- <tr><td colspan='2'>Pizzeria <b>Nuova Aurora</b></td></tr> -->
+        <tr><td colspan='2'>Indirizzo: Via Capelli, 1 <br> 43035 Felino - Parma - Italia<br>
+          <a href='http://maps.google.com/?q=Pizzeria-Nuova-Aurora' target="_blank">Come raggiungerci 1</a><br>
+          <a href='https://goo.gl/maps/upH9b3dXjvPxkpfC6' target="_blank">Come raggiungerci 2</a>
+        </td></tr>
       <tr><td colspan='2'>Telefono: <a href='tel:+39-0521-836269'>+39 0521 836269</a></td></tr>
       <tr><td colspan='2'>Telefono: <a href='tel:+39-339-3010475'>+39 339 3010475</a></td></tr>
       <tr><td><img src='images/facebook-new.png' width='40px'></td><td>Facebook: <a href='https://www.facebook.com/pizzerianuovaaurora/'>pizzerianuovaaurora</td></tr>
@@ -274,19 +279,18 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <!-- Modal Dlg Structure -->
   <div id="dlgAddItem" class="modal" style='border-radius: 8px; max-height: 75%;'>
     <div class="modal-content">
-      <h6>Aggiungi:</h6>
-      <h6 id='dlgAddNome' style='color:red'>Nome</h6>
+      <h6 id='dlgAddNome' style='color:red; text-align: center;'>Nome</h6>
       <input type='hidden' id='dlgAddIdx'>
       <input type='hidden' id='dlgAddTipo'>
-      <h1 style='text-align: center;padding: 15px 0' id='dlgAddNumero'>1</h1>
+      <h2 style='text-align: center;padding: 13px 0' id='dlgAddNumero'>1</h2>
       <p style='text-align: center;'>
         <span onclick='aggiungi1()' style='padding: 5px 12px; color:green'>
           <i id='menuIconP' class="large material-icons">add_circle</i></span>
         <span onclick='togli1()' style='padding: 5px 12px; color:red'>
           <i id='menuIconM' class="large material-icons">do_not_disturb_on</i></span>
       </p>
-      <p>Modifiche/note</p><p style='font-size: smaller;'>*potrebbero comportare variazioni di prezzo rispetto a quanto mostrato</p>
-      <input id='dlgModifiche'>
+      <p>Modifiche/note</p><p style='font-size: smaller;color: red;'>NOTA: potrebbero comportare variazioni di prezzo rispetto a quanto mostrato</p>
+      <input type='text' id='dlgModifiche' style='height: 2rem;'>
     </div>
     <div class="modal-footer">
       <a href="#!" onclick='addToOrder(event)' class="modal-close waves-effect waves-green btn-flat">Aggiungi</a>

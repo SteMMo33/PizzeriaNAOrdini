@@ -33,12 +33,12 @@ body {
 
 .giorno-item {
     text-align: center;
-    padding: 25px 5px;
-    font-size: 2em;
+    font-size: 1.8em;
 }
 
 .giornoNonValido {
-    color: red;
+    color: lightslategray;
+    font-weight: 700;
 }
 
 .giornoValido {
