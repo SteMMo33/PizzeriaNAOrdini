@@ -76,6 +76,10 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
     <div class="container">
       <!-- <div class="red">{{error}}</div> -->
 
+      <div >
+        Filtro per [almeno 3 car.]: <input id='edtCerca' style='width:40%'' oninput="cercaMod()">
+      </div>
+
       <ul class="collection with-header" id='mainList'>
 
           <li class="collection-item pink white-text">
@@ -289,7 +293,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
         <span onclick='togli1()' style='padding: 5px 12px; color:red'>
           <i id='menuIconM' class="large material-icons">do_not_disturb_on</i></span>
       </p>
-      <p>Modifiche/note</p><p style='font-size: smaller;color: red;'>NOTA: potrebbero comportare variazioni di prezzo rispetto a quanto mostrato</p>
+      <p>Modifiche / note</p><p style='font-size: smaller;color: red;'>Le modifiche potrebbero comportare variazioni di prezzo rispetto a quanto mostrato</p>
       <input type='text' id='dlgModifiche' style='height: 2rem;'>
     </div>
     <div class="modal-footer">
@@ -306,7 +310,6 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
 <script type="text/javascript" src="scripts/materialize.min.js"></script>
 
 <script>
-
 
 // Materialize - Modal
 var dlgAddToOrder
@@ -325,6 +328,36 @@ if ('serviceWorker' in navigator) {
         });
   });
 }
+
+
+// Gestione ricerca ingrediente
+var filtroAttivo = false;
+
+function cercaMod(){
+  var rows = document.querySelectorAll(".itemAdded")
+  var text = document.querySelector('#edtCerca').value
+  if (text.length < 3) {
+    if (text.length==2 && filtroAttivo==true){
+      filtroAttivo = false;
+      rows.forEach( (row) => row.style.display = 'block')
+    }
+    return
+  }
+
+  // Filtra le righe con l'ingrediente
+  filtroAttivo = true;
+  console.log(".. filtro con "+text);
+  rows.forEach( (row) => {
+    // Cerca negli ingredienti e, se mancanti, nel titolo
+    var el = row.querySelector("#templateDesc")
+    if (el==null)
+      el = row.querySelector("#templateTitle")
+    if (el==null) return
+    var ingr = el.innerText
+    row.style.display = ingr.includes(text) ? "block" : "none"
+  })
+}
+
 </script>
 
 

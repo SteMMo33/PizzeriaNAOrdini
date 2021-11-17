@@ -1,7 +1,7 @@
 {
     "name": "Ordini - Pizzeria Nuova Aurora",
     "short_name": "Ordini Nuova Aurora",
-    "description": "App per fare ordini alla Pizzeria Nuova Aurora",
+    "description": "App per ordinare alla Pizzeria Nuova Aurora - Felino (PR)",
     "icons": [{
       "src": "/images/icons/logo128.png",
         "sizes": "128x128",
