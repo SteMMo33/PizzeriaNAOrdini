@@ -77,7 +77,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
       <!-- <div class="red">{{error}}</div> -->
 
       <div >
-        Filtro per [almeno 3 car.]: <input id='edtCerca' style='width:40%'' oninput="cercaMod()">
+        Filtro [min 3 car.]: <input id='edtCerca' style='width:40%'' oninput="cercaMod()">
       </div>
 
       <ul class="collection with-header" id='mainList'>
@@ -353,8 +353,8 @@ function cercaMod(){
     if (el==null)
       el = row.querySelector("#templateTitle")
     if (el==null) return
-    var ingr = el.innerText
-    row.style.display = ingr.includes(text) ? "block" : "none"
+    var ingr = el.innerText.toLowerCase()
+    row.style.display = ingr.includes(text.toLowerCase()) ? "block" : "none"
   })
 }
 
