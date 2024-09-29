@@ -16,11 +16,11 @@ body {
 
 
 .collection .collection-item {
-    padding: 5px 10px;
+    padding: 5px 7px;
 }
 
 .collection.with-header .collection-item {
-    padding: 5px 10px;
+    padding: 5px 7px;
 }
 
 .fascia-item {

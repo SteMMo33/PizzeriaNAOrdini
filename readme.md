@@ -43,13 +43,13 @@ Chrome ha indicato che l'applicazione poteva essere installata quando ho aggiunt
 Basic off-line experience: pagina custom con messaggio.
 
 Aggiunto un bottone di nome 'butInstall' per gestire l'installazione della app come previsto in install.js
-
+Il browser propone comunque una icona di installazione nella barra dell'indirizzo.
 
 
 Impostazioni
 ------------
 I settings dell'applicazione vengono salvati in localStorage
-
+Elenco settings **TODO**
 
 
 Debug
@@ -89,3 +89,5 @@ complete(todo) {
 }
 
 
+# Analytics
+**TODO** Come si manifesta?

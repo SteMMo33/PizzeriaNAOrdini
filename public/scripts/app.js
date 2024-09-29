@@ -14,7 +14,8 @@ var pizzeOrdinate   // Array per ogni fascia con il totale pizze già ordinate
 */
 function showHome(item)
 {
-    console.log('showHome '+item)
+    console.log('showHome: '+item)
+    document.querySelector('#edtCerca').value=''
     hidePages()
     document.getElementById('pageHome').style.display='block';
     if (item) getMenuItems(item)

@@ -47,7 +47,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
   <div class="pusha-panel pusha-panel--left" aria-hidden="true">
     <div class="pusha-panel__content">
       <img src='/images/logo300.jpg' style='width: 180px; margin: 15px auto;display:block;'>
-      <div id='versione'>Versione: 0.2</div>
+      <div id='versione'>Versione: 0.3</div>
       <ul class="menu__list">
         <li><a onclick="showHome('pizze');panel.close();"><i class="material-icons">local_pizza</i> Pizze</a></li>
         <li><a onclick="showHome('speciali');panel.close();"><i class="material-icons">local_pizza</i> Pizze speciali</a></li>
@@ -62,7 +62,6 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
 <script src="scripts/pusha.min.js"></script>
 <script>
   var panel = new Pusha('.pusha-panel--left', { closeOnClick: true });
-
   document.querySelector('.header__icon').addEventListener('click', panel.open);
 </script>
 
@@ -77,7 +76,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
       <!-- <div class="red">{{error}}</div> -->
 
       <div >
-        Filtro [min 3 car.]: <input id='edtCerca' style='width:40%'' oninput="cercaMod()">
+        Filtro ingred. [min 3 car.]: <input id='edtCerca' style='width:35%'' oninput="cercaIngred()">
       </div>
 
       <ul class="collection with-header" id='mainList'>
@@ -96,13 +95,13 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
             <div>
               <table><tbody>
                 <tr style='border:none'>
-                <td>
+                <td width="75%">
                   <span id='templateTitle' style='font-weight: 700;'>{{title}}</span>
                   <br />
                   <span class="grey-text" id='templateDesc'>{{description}}</span>
                 </td>
                 <td class="secondary-content" id='templatePrice' 
-                  style='width: 72px; text-align: right; font-weight: 700;font-size:16px; float:none'>${{price}}
+                  style='width: 78px; text-align: right; font-weight: 700;font-size:14px; float:none'>${{price}}
                 </td>
                 <td id='templatePlus' style='text-align: right;'>
                   <i id='menuIcon' class="material-icons">add_circle</i>
@@ -112,6 +111,7 @@ onclick="showOrdine()"><i class="material-icons">local_grocery_store</i><span id
             </table>
             </div>
           </li>
+          <!-- /Template -->
 
       </ul>
   </div>
@@ -333,7 +333,7 @@ if ('serviceWorker' in navigator) {
 // Gestione ricerca ingrediente
 var filtroAttivo = false;
 
-function cercaMod(){
+function cercaIngred(){
   var rows = document.querySelectorAll(".itemAdded")
   var text = document.querySelector('#edtCerca').value
   if (text.length < 3) {
